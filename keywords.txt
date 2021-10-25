@@ -1,0 +1,19 @@
+# datatypes and class names 
+
+LibEXG              KEYWORD1
+
+# functions and methods 
+
+get_ECG             KEYWORD2
+get_EOG             KEYWORD2
+get_EMG             KEYWORD2
+get_EEG             KEYWORD2
+
+# defines
+
+BIOAMP_EXG_PILL_H   LITERAL1
+BUFFER_SIZE_EMG     LITERAL1
+SAMPLE_RATE_ECG     LITERAL1
+SAMPLE_RATE_EEG     LITERAL1
+SAMPLE_RATE_EOG     LITERAL1
+BAUD_RATE           LITERAL1
