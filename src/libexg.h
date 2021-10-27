@@ -5,8 +5,8 @@
 // please support Upside Down Labs and open-source hardware by purchasing
 // products from Upside Down Labs!
 
-// Copyright (c) 2021 Moteen Shah
-// Copyright (c) 2021 Upside Down Labs - moteenshah.02@gmail.com
+// Copyright (c) 2021 Moteen Shah moteenshah.02@gmail.com
+// Copyright (c) 2021 Upside Down Labs - contact@upsidedownlabs.tech
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -26,8 +26,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#ifndef BIOAMP_EXG_PILL_H
-#define BIOAMP_EXG_PILL_H
+
+#ifndef BIOAMP_EXG_PILL_H_
+#define BIOAMP_EXG_PILL_H_
 
 #define BUFFER_SIZE_EMG 128
 
@@ -37,24 +38,23 @@
 #include "WProgram.h"
 #endif
 
-class LibEXG
-{
+class LibEXG{
 public:
   // constructor
   LibEXG(bool displayMsg = false);
 
   // Methods
-  float get_ECG(int INPUT_PIN);
-  float get_EEG(int INPUT_PIN);
-  float get_EOG(int INPUT_PIN);
-  float get_EMG(int INPUT_PIN);
+  float getecg(int INPUT_PIN);
+  float geteeg(int INPUT_PIN);
+  float geteog(int INPUT_PIN);
+  float getemg(int INPUT_PIN);
 
   float EEGFilter(float input);
   float EOGFilter(float input);
   float ECGFilter(float input);
   float EMGFilter(float input);
 
-  int get_Envelop(int abs_emg);
+  int getEnvelop(int abs_emg);
 
 private:
   int data_index_emg, sum_emg;

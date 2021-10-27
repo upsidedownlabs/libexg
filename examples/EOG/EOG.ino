@@ -5,8 +5,8 @@
 // please support Upside Down Labs and open-source hardware by purchasing
 // products from Upside Down Labs!
 
-// Copyright (c) 2021 Moteen Shah
-// Copyright (c) 2021 Upside Down Labs - moteenshah.02@gmail.com
+// Copyright (c) 2021 Moteen Shah moteenshah.02@gmail.com
+// Copyright (c) 2021 Upside Down Labs - contact@upsidedownlabs.tech
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -35,16 +35,14 @@ int INPUT_PIN = 10;
 
 LibEXG libEXG(true);
 
-void setup()
-{
+void setup(){
   // put your setup code here, to run once:
   Serial.begin(BAUD_RATE);
 }
 
-void loop()
-{
+void loop(){
   // put your main code here, to run repeatedly:
-  float EOG_Data = libEXG.get_EOG(INPUT_PIN);
+  float EOGData = libEXG.geteog(INPUT_PIN);
 
-  Serial.println(EOG_Data);
+  Serial.println(EOGData);
 }

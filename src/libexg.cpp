@@ -5,8 +5,8 @@
 // please support Upside Down Labs and open-source hardware by purchasing
 // products from Upside Down Labs!
 
-// Copyright (c) 2021 Moteen Shah
-// Copyright (c) 2021 Upside Down Labs - moteenshah.02@gmail.com
+// Copyright (c) 2021 Moteen Shah moteenshah.02@gmail.com
+// Copyright (c) 2021 Upside Down Labs - contact@upsidedownlabs.tech
 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,6 @@
 // SOFTWARE.
 
 
-
 #include "libexg.h"
 
 #define SAMPLE_RATE_ECG 125
@@ -38,9 +37,7 @@
 LibEXG::LibEXG(bool displayMsg) {}
 
 // Signals
-float LibEXG::get_ECG(int INPUT_PIN)
-{
-
+float LibEXG::getecg(int INPUT_PIN){
   static unsigned long past = 0;
   unsigned long present = micros();
   unsigned long interval = present - past;
@@ -51,8 +48,7 @@ float LibEXG::get_ECG(int INPUT_PIN)
   timer -= interval;
 
   // Sample
-  if (timer < 0)
-  {
+  if (timer < 0){
     timer += 1000000 / SAMPLE_RATE_ECG;
     float sensor_value = analogRead(INPUT_PIN);
     float signal = ECGFilter(sensor_value);
@@ -60,8 +56,7 @@ float LibEXG::get_ECG(int INPUT_PIN)
   }
 }
 
-float LibEXG::get_EMG(int INPUT_PIN)
-{
+float LibEXG::getemg(int INPUT_PIN){
   static unsigned long past = 0;
   unsigned long present = micros();
   unsigned long interval = present - past;
@@ -81,8 +76,7 @@ float LibEXG::get_EMG(int INPUT_PIN)
   }
 }
 
-float LibEXG::get_EOG(int INPUT_PIN)
-{
+float LibEXG::geteog(int INPUT_PIN){
   static unsigned long past = 0;
   unsigned long present = micros();
   unsigned long interval = present - past;
@@ -102,8 +96,7 @@ float LibEXG::get_EOG(int INPUT_PIN)
   }
 }
 
-float LibEXG::get_EEG(int INPUT_PIN)
-{
+float LibEXG::geteeg(int INPUT_PIN){
   static unsigned long past = 0;
   unsigned long present = micros();
   unsigned long interval = present - past;
@@ -125,8 +118,7 @@ float LibEXG::get_EEG(int INPUT_PIN)
 
 // Filters
 
-float LibEXG::EOGFilter(float input)
-{
+float LibEXG::EOGFilter(float input){
   float output = input;
   {
     static float z1, z2; // filter section state
@@ -159,8 +151,7 @@ float LibEXG::EOGFilter(float input)
   return output;
 }
 
-float LibEXG::EMGFilter(float input)
-{
+float LibEXG::EMGFilter(float input){
   float output = input;
   {
     static float z1, z2; // filter section state
@@ -193,8 +184,7 @@ float LibEXG::EMGFilter(float input)
   return output;
 }
 
-float LibEXG::EEGFilter(float input)
-{
+float LibEXG::EEGFilter(float input){
 
   float output = input;
   {
@@ -228,8 +218,7 @@ float LibEXG::EEGFilter(float input)
   return output;
 }
 
-float LibEXG::ECGFilter(float input)
-{
+float LibEXG::ECGFilter(float input){
   float output = input;
   {
     static float z1, z2; // filter section state
@@ -263,8 +252,7 @@ float LibEXG::ECGFilter(float input)
 }
 
 // Envelop
-int LibEXG::get_Envelop(int abs_emg)
-{
+int LibEXG::getEnvelop(int abs_emg){
   sum_emg -= circular_buffer_emg[data_index_emg];
   sum_emg += abs_emg;
   circular_buffer_emg[data_index_emg] = abs_emg;
