@@ -34,17 +34,22 @@
 #define SAMPLE_RATE_EMG 500
 #define SAMPLE_RATE_EOG 75
 
+static unsigned long past = 0;
+static long timer = 0;  
+static unsigned long interval = 0;
+static unsigned long present = 0;
+
 LibEXG::LibEXG(bool displayMsg) {}
 
 // Signals
 float LibEXG::getecg(int INPUT_PIN){
-  static unsigned long past = 0;
-  unsigned long present = micros();
-  unsigned long interval = present - past;
+
+  present = micros();
+  interval = present - past;
   past = present;
 
   // Run timer
-  static long timer = 0;
+
   timer -= interval;
 
   // Sample
@@ -57,13 +62,12 @@ float LibEXG::getecg(int INPUT_PIN){
 }
 
 float LibEXG::getemg(int INPUT_PIN){
-  static unsigned long past = 0;
-  unsigned long present = micros();
-  unsigned long interval = present - past;
+
+  present = micros();
+  interval = present - past;
   past = present;
 
   // Run timer
-  static long timer = 0;
   timer -= interval;
 
   // Sample
@@ -77,13 +81,12 @@ float LibEXG::getemg(int INPUT_PIN){
 }
 
 float LibEXG::geteog(int INPUT_PIN){
-  static unsigned long past = 0;
-  unsigned long present = micros();
-  unsigned long interval = present - past;
+  
+  present = micros();
+  interval = present - past;
   past = present;
 
   // Run timer
-  static long timer = 0;
   timer -= interval;
 
   // Sample
@@ -97,13 +100,12 @@ float LibEXG::geteog(int INPUT_PIN){
 }
 
 float LibEXG::geteeg(int INPUT_PIN){
-  static unsigned long past = 0;
-  unsigned long present = micros();
-  unsigned long interval = present - past;
+
+  present = micros();
+  interval = present - past;
   past = present;
 
   // Run timer
-  static long timer = 0;
   timer -= interval;
 
   // Sample
@@ -251,11 +253,3 @@ float LibEXG::ECGFilter(float input){
   return output;
 }
 
-// Envelop
-int LibEXG::getEnvelop(int abs_emg){
-  sum_emg -= circular_buffer_emg[data_index_emg];
-  sum_emg += abs_emg;
-  circular_buffer_emg[data_index_emg] = abs_emg;
-  data_index_emg = (data_index_emg + 1) % BUFFER_SIZE_EMG;
-  return (sum_emg / BUFFER_SIZE_EMG) * 2;
-}

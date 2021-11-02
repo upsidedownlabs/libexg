@@ -30,9 +30,12 @@
 #include <Arduino.h>
 #include <libexg.h>
 
+int data_index_emg, sum_emg;
+int circular_buffer_emg[BUFFER_SIZE_EMG];
+
 //#define SAMPLE_RATE 125
-#define BAUD_RATE 9600
-int INPUT_PIN = 10;
+#define BAUD_RATE 115200
+int INPUT_PIN = 36;
 
 LibEXG libEXG(true);
 
@@ -44,6 +47,15 @@ void setup(){
 void loop(){
   // put your main code here, to run repeatedly:
   float ECGData = libEXG.getemg(INPUT_PIN);
-  int envelop = libEXG.get_Envelop(abs(ECGData));
+  int envelop = getEnvelop(abs(ECGData));
   Serial.println(envelop);
+}
+
+// Envelop
+int getEnvelop(int abs_emg){
+  sum_emg -= circular_buffer_emg[data_index_emg];
+  sum_emg += abs_emg;
+  circular_buffer_emg[data_index_emg] = abs_emg;
+  data_index_emg = (data_index_emg + 1) % BUFFER_SIZE_EMG;
+  return (sum_emg / BUFFER_SIZE_EMG) * 2;
 }

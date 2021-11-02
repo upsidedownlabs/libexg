@@ -31,8 +31,8 @@
 #include <libexg.h>
 
 //#define SAMPLE_RATE 125
-#define BAUD_RATE 9600
-int INPUT_PIN = 10;
+#define BAUD_RATE 112500
+int INPUT_PIN = 36;
 
 LibEXG libEXG(true);
 
@@ -44,6 +44,5 @@ void setup(){
 void loop(){
   // put your main code here, to run repeatedly:
   float EEGData = libEXG.geteeg(INPUT_PIN);
-
   Serial.println(EEGData);
 }

@@ -57,8 +57,7 @@ public:
   int getEnvelop(int abs_emg);
 
 private:
-  int data_index_emg, sum_emg;
-  int circular_buffer_emg[BUFFER_SIZE_EMG];
+
 };
 
 #endif
