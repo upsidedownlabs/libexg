@@ -43,6 +43,5 @@ void setup(){
 
 void loop(){
   // put your main code here, to run repeatedly:
-  float EMGData = libEXG.getemg(INPUT_PIN);
-  Serial.println(EMGData);
+  libEXG.getemg(INPUT_PIN);
 }

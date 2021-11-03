@@ -30,7 +30,6 @@
 #include <Arduino.h>
 #include <libexg.h>
 
-//#define SAMPLE_RATE 125
 #define BAUD_RATE 115200
 int INPUT_PIN = 36;
 
@@ -43,6 +42,5 @@ void setup(){
 
 void loop(){
   // put your main code here, to run repeatedly:
-  float ECGData = libEXG.getecg(INPUT_PIN);
-  Serial.println(ECGData);
+  libEXG.getecg(INPUT_PIN); 
 }

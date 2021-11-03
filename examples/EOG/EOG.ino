@@ -42,6 +42,5 @@ void setup(){
 
 void loop(){
   // put your main code here, to run repeatedly:
-  float EOGData = libEXG.geteog(INPUT_PIN);
-  Serial.println(EOGData);
+  libEXG.geteog(INPUT_PIN);
 }

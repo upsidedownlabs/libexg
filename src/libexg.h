@@ -54,8 +54,6 @@ public:
   float ECGFilter(float input);
   float EMGFilter(float input);
 
-  int getEnvelop(int abs_emg);
-
 private:
 
 };
