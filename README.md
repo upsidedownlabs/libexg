@@ -33,10 +33,10 @@ ___
 
 ## Examples
 The examples with this library shows the basic implementation of data extraction from Bio-Amp-EXG-Pill Module.
-* [ECG](examples\ECG\ECG.ino)
-* [EEG](examples\EEG\EEG.ino)
-* [EMG](examples\EMG\EMG.ino)
-* [EOG](examples\EOG\EOG.ino)
+* [ECG](examples/ECG/ECG.ino)
+* [EEG](examples/EEG/EEG.ino)
+* [EMG](examples/EMG/EMG.ino)
+* [EOG](examples/EOG/EOG.ino)
 
 ## Methods
 ___
