@@ -1,5 +1,5 @@
 # __libexg__
-This repository contains Arduino library for using Bio-Amp-EXG-Pill to record EMG, ECG, EEG, EOG data using Arduino. You can use the filtered data from the Bio-Amp-EXG-Pill Module to create new and awesome Projects!
+This repository contains Arduino library for using Bio-Potential Amplifiers to record EMG, ECG, EEG, EOG data using Arduino. You can use the filtered data from the Bio-potential Amplifier Modules to create new and awesome Projects!
 
 
 ## Compatibility
@@ -13,9 +13,9 @@ This Library can be used with multiple Arduino boards available in the market, f
 Also this library can support ESP32 develpment boards.
 ___
 ## Usage
-This library allows an Arduino board to use it's ADC for getting analog data from Bio-Amp-EXG-Pill. The module has in-built amplifier which amplifies the electrcal signals generated in our nerve cells and sends the filtered and amplified electricals signals to the microcontroller.
+This library allows an Arduino board to use it's ADC for getting analog data from Bio-Potential amplifiers. This library has been tested on the Bio-Amp-EXG-Pill module that amplifies the electrcal signals generated in our nerve cells and sends the filtered and amplified electricals signals to the microcontroller.
 
-The __libexg__ library supports only one module at a time with a perticular type of data extraction which maybe anyone from EMG, ECG, EEG, EOG data extraction. 
+The __libexg__ library supports only one amplifier module at a time with a particular type of data extraction which maybe anyone from EMG, ECG, EEG, EOG data extraction. 
 To use this library:
 
 `#include <libexg.h>`
@@ -29,6 +29,8 @@ The Basic connection of Bio-Amp-EXG-Pill can de done as shown
 The data pin can be connected to any analog input pin of arduino.
 
 Similarly, ESP32 can also be connected but with a Voltage-Divider as this microcontroller works on 3.3volts.
+
+Any other Bio-Potential Amplifier can be connected in the same way with the analog output of the module connected to the analog input of arduino or any other microcontroller.
 ___
 
 ## Examples
@@ -47,6 +49,8 @@ ___
 
 __Parameters__
 * pin -  the number of the pin that the Bio-Amp_EXG-Pill data pin is attached to. 
+
+__Return__
 ___
 #### __`geteeg()`__
 - Enable an analog Input pin and get filtered EEG data at a specific sample rate.
