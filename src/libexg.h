@@ -26,7 +26,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #ifndef BIOAMP_EXG_PILL_H_
 #define BIOAMP_EXG_PILL_H_
 
@@ -38,13 +37,14 @@
 #include "WProgram.h"
 #endif
 
-class LibEXG{
+class LibEXG
+{
 public:
   // constructor
   LibEXG(bool displayMsg = false);
 
   // Methods
-  float getecg(int INPUT_PIN);
+  float getecg(int mode ,int INPUT_PIN);
   float geteeg(int INPUT_PIN);
   float geteog(int INPUT_PIN);
   float getemg(int INPUT_PIN);
@@ -55,7 +55,7 @@ public:
   float EMGFilter(float input);
 
 private:
-
+  
 };
 
 #endif
