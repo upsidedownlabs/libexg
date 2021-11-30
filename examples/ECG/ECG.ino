@@ -27,20 +27,19 @@
 // SOFTWARE.
 
 
-#include <Arduino.h>
 #include <libexg.h>
 
 #define BAUD_RATE 115200
-int INPUT_PIN = 36;
+int INPUT_PIN = A1;
 
-LibEXG libEXG(true);
+LibEXG libEXG;
 
 void setup(){
-  // put your setup code here, to run once:
   Serial.begin(BAUD_RATE);
 }
 
 void loop(){
   // put your main code here, to run repeatedly:
-  libEXG.getecg(INPUT_PIN); 
+  float data = libEXG.getData(ECG_MODE, INPUT_PIN); 
+  Serial.println(data);
 }
