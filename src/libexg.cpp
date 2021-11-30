@@ -28,94 +28,54 @@ SOFTWARE.
 */
 #include "libexg.h"
 
-#define SAMPLE_RATE 500
-float sensor_value[4];
-float signal[4];
-LibEXG::LibEXG(bool displayMsg) {}
+LibEXG::LibEXG() {}
 
 // Signals
-float LibEXG::getecg(int mode, int INPUT_PIN)
+float LibEXG::getData(int mode, int INPUT_PIN)
 {
-  static unsigned long past = 0;
-	unsigned long present = micros();
-	unsigned long interval = present - past;
-	past = present;
-
-	// Run timer
-	static long timer = 0;
-	timer -= interval;
-
-	// Sample
-	if(timer < 0){
-		timer += 1000000 / SAMPLE_RATE;
-		sensor_value[0] = analogRead(INPUT_PIN);
-		signal[0] = EOGFilter(sensor_value);
-    sensor_value[1] = analogRead(INPUT_PIN);
-		signal[0] = EOGFilter(sensor_value);
-    sensor_value[2] = analogRead(INPUT_PIN);
-		signal[0] = EOGFilter(sensor_value);
-    sensor_value[3] = analogRead(INPUT_PIN);
-		signal[0] = EOGFilter(sensor_value);
-	}
-}
-
-float LibEXG::getemg(int INPUT_PIN)
-{
-
-  present = micros();
-  interval = present - past;
-  past = present;
-
-  // Run timer
-  timer -= interval;
-
-  // Sample
-  if (timer < 0)
+  while (1)
   {
-    timer += 1000000 / SAMPLE_RATE;
-    float sensor_value = analogRead(INPUT_PIN);
-    float signal = ECGFilter(sensor_value);
-    Serial.println(signal);
+    static unsigned long past = 0;
+    unsigned long present = micros();
+    unsigned long interval = present - past;
+    past = present;
+
+    // Run timer
+    static long timer = 0;
+    timer -= interval;
+
+    // Sample
+    if (timer < 0)
+    {
+      timer += 1000000 / SAMPLE_RATE;
+      signal[0] = EOGFilter(analogRead(INPUT_PIN));
+      signal[1] = EMGFilter(analogRead(INPUT_PIN));
+      signal[2] = EEGFilter(analogRead(INPUT_PIN));
+      signal[3] = ECGFilter(analogRead(INPUT_PIN));
+    }
+    if (present >= (1000 * LOOP_TIME))
+    {
+      break;
+    }
   }
-}
 
-float LibEXG::geteog(int INPUT_PIN)
-{
-
-  present = micros();
-  interval = present - past;
-  past = present;
-
-  // Run timer
-  timer -= interval;
-
-  // Sample
-  if (timer < 0)
+  switch (mode)
   {
-    timer += 1000000 / SAMPLE_RATE;
-    float sensor_value = analogRead(INPUT_PIN);
-    float signal = ECGFilter(sensor_value);
-    Serial.println(signal);
-  }
-}
-
-float LibEXG::geteeg(int INPUT_PIN)
-{
-
-  present = micros();
-  interval = present - past;
-  past = present;
-
-  // Run timer
-  timer -= interval;
-
-  // Sample
-  if (timer < 0)
-  {
-    timer += 1000000 / SAMPLE_RATE;
-    float sensor_value = analogRead(INPUT_PIN);
-    float signal = ECGFilter(sensor_value);
-    Serial.println(signal);
+  case 1:
+    return signal[1];
+    break;
+  case 2:
+    return signal[2];
+    break;
+  case 3:
+    return signal[0];
+    break;
+  case 4:
+    return signal[3];
+    break;
+  default:
+    return NULL;
+    break;
   }
 }
 

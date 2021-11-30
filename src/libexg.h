@@ -30,6 +30,11 @@
 #define BIOAMP_EXG_PILL_H_
 
 #define BUFFER_SIZE_EMG 128
+#define EMG_MODE 1
+#define EEG_MODE 2
+#define EOG_MODE 3
+#define ECG_MODE 4
+#define SAMPLE_RATE 500
 
 #if (ARDUINO >= 100)
 #include "Arduino.h"
@@ -40,22 +45,15 @@
 class LibEXG
 {
 public:
-  // constructor
-  LibEXG(bool displayMsg = false);
-
   // Methods
-  float getecg(int mode ,int INPUT_PIN);
-  float geteeg(int INPUT_PIN);
-  float geteog(int INPUT_PIN);
-  float getemg(int INPUT_PIN);
-
-  float EEGFilter(float input);
   float EOGFilter(float input);
-  float ECGFilter(float input);
   float EMGFilter(float input);
+  float EEGFilter(float input);
+  float ECGFilter(float input);
+  float getData(int mode, int INPUT_PIN);
+  float signal[4];
 
 private:
-  
 };
 
 #endif
