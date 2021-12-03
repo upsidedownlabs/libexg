@@ -26,20 +26,31 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
 #include <libexg.h>
 
 #define BAUD_RATE 115200
-int INPUT_PIN = A1;
+float data_0, data_1, data_2, data_3, data_4, data_5;
+LibEXG libEXG(true);
 
-LibEXG libEXG;
-
-void setup(){
+void setup()
+{
   Serial.begin(BAUD_RATE);
 }
 
-void loop(){
+void loop()
+{
   // put your main code here, to run repeatedly:
-  float data = libEXG.getData(EEG_MODE, INPUT_PIN, CHANNEL_0); 
-  Serial.println(data);
+  data_0 = libEXG.getData(EMG_MODE, A0, CHANNEL_0);
+  data_1 = libEXG.getData(EMG_MODE, A1, CHANNEL_1);
+  data_2 = libEXG.getData(EMG_MODE, A2, CHANNEL_2);
+  data_3 = libEXG.getData(EMG_MODE, A3, CHANNEL_3);
+  data_4 = libEXG.getData(EMG_MODE, A4, CHANNEL_4);
+  data_5 = libEXG.getData(EMG_MODE, A5, CHANNEL_5);
+ 
+    Serial.println(data_0);
+    Serial.println(data_1);
+    Serial.println(data_2);
+    Serial.println(data_3);
+    Serial.println(data_4);
+    Serial.println(data_5);
 }
