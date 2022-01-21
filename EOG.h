@@ -5,6 +5,7 @@
 // please support Upside Down Labs and open-source hardware by purchasing
 // products from Upside Down Labs!
 
+// Copyright (c) Chinmay Lonkar chinmay20220@gmail.com
 // Copyright (c) 2021 Moteen Shah moteenshah.02@gmail.com
 // Copyright (c) 2021 Upside Down Labs - contact@upsidedownlabs.tech
 
@@ -27,35 +28,20 @@
 // SOFTWARE.
 
 
-#ifndef BIOAMP_EXG_PILL_H_
-#define BIOAMP_EXG_PILL_H_
-
-#define BUFFER_SIZE_EMG 128
-
-#if (ARDUINO >= 100)
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
-
-class LibEXG{
+#ifndef _EOG_H
+#define _EOG_H
+#include "Filters.h"
+class EOG_filter
+{
 public:
-  // constructor
-  LibEXG(bool displayMsg = false);
-
-  // Methods
-  float getecg(int INPUT_PIN);
-  float geteeg(int INPUT_PIN);
-  float geteog(int INPUT_PIN);
-  float getemg(int INPUT_PIN);
-
-  float EEGFilter(float input);
-  float EOGFilter(float input);
-  float ECGFilter(float input);
-  float EMGFilter(float input);
+    void init(FILTER_TYPE ftype, int sampleFreq);
+    float update(float input);
 
 private:
-
+    float states[2];
+    float num[3];
+    float den[3];
+    
 };
 
 #endif

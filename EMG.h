@@ -5,6 +5,7 @@
 // please support Upside Down Labs and open-source hardware by purchasing
 // products from Upside Down Labs!
 
+// Copyright (c) Chinmay Lonkar chinmay20220@gmail.com
 // Copyright (c) 2021 Moteen Shah moteenshah.02@gmail.com
 // Copyright (c) 2021 Upside Down Labs - contact@upsidedownlabs.tech
 
@@ -27,21 +28,20 @@
 // SOFTWARE.
 
 
-#include <Arduino.h>
-#include <libexg.h>
+#ifndef _EMG_H
+#define _EMG_H
+#include "Filters.h"
 
-//#define SAMPLE_RATE 125
-#define BAUD_RATE 115200
-int INPUT_PIN = 36;
+class EMG_filter
+{
+public:
+    void init(FILTER_TYPE ftype, int sampleFreq);
+    float update(float input);
 
-LibEXG libEXG(true);
+private:
+    float states[2];
+    float num[3];
+    float den[3];
+};
 
-void setup(){
-  // put your setup code here, to run once:
-  Serial.begin(BAUD_RATE);
-}
-
-void loop(){
-  // put your main code here, to run repeatedly:
-  libEXG.getemg(INPUT_PIN);
-}
+#endif

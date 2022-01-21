@@ -5,6 +5,7 @@
 // please support Upside Down Labs and open-source hardware by purchasing
 // products from Upside Down Labs!
 
+// Copyright (c) Chinmay Lonkar chinmay20220@gmail.com
 // Copyright (c) 2021 Moteen Shah moteenshah.02@gmail.com
 // Copyright (c) 2021 Upside Down Labs - contact@upsidedownlabs.tech
 
@@ -26,21 +27,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <Arduino.h>
-#include <libexg.h>
 
-//#define SAMPLE_RATE 125
-#define BAUD_RATE 115200
-int INPUT_PIN = 36;
+#ifndef _AHF_H
+#define _AHF_H
 
-LibEXG libEXG(true);
+class AH_filter
+{
+public:
+    void init(int sampleFreq, int humFreq);
+    float update(float input);
 
-void setup(){
-  // put your setup code here, to run once:
-  Serial.begin(BAUD_RATE);
-}
+private:
+    float states[4];
+    float num[6];
+    float den[6];
+    float gain;
+};
 
-void loop(){
-  // put your main code here, to run repeatedly:
-  libEXG.geteog(INPUT_PIN);
-}
+#endif
